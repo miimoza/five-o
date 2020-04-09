@@ -1,0 +1,20 @@
+#===============================================================================
+#============================== FIVE-O COVID19 =================================
+#===========================         V1.0          =============================
+#===============================================================================
+
+This application is able to generate a COVID certificate in the hurry.
+
+Requirements:
+    pkg install nodejs
+
+Initialisation:
+    - Please fill identify.conf with your personnal information.
+    - ./install.sh
+
+Usage:
+    ./five-o.sh
+
+
+@Passipastrat 2020
+#===============================================================================

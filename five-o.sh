@@ -1,8 +1,9 @@
+#!/bin/sh
+
 #===============================================================================
 #=========================== CERTIFICATE GENERATOR =============================
 #===============================================================================
 
-# Requirement: npm install -g qrcode
 leave_min_ago="20"
 
 #=================================== Fields ====================================
@@ -18,6 +19,12 @@ town="Challes-les-Eaux"
 printf "Motive: (0:travail, 1:courses, 2:sante, 3:famille, 4:sport, 5:judiciaire, 6:missions) "
 read motive
 
+while [[ ! "$motive" =~ ^[0-6]$ ]]; do
+  echo "Entry should be a number between 0 and 6 !"
+  printf "Motive: (0:travail, 1:courses, 2:sante, 3:famille, 4:sport, 5:judiciaire, 6:missions) "
+  read motive
+done
+
 #================================ Calculate Time ===============================
 leaving_date=$(date +%D)
 leaving_time=$(date -d '-20min' +'%H%M')
@@ -30,4 +37,6 @@ echo "creation_date: $creation_date $creation_time"
 echo "leaving_date: $leaving_date $leaving_time"
 
 #================================ Generate PDF =================================
-./generate_certificate "$name" "$firstname" "$birth_date" "$birth_place" "$address" "$zipcode" "$town" "$leaving_date" "$leaving_time" "$creation_date" "$creation_time" "$motive"
+./certificate/generate_certificate.sh "$name" "$firstname" "$birth_date" "$birth_place" "$address" "$zipcode" "$town" "$leaving_date" "$leaving_time" "$creation_date" "$creation_time" "$motive"
+
+mv certificate/certificate.pdf .
